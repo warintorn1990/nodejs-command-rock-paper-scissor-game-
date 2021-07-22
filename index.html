@@ -1,0 +1,88 @@
+<body>
+    <h1>Basic Rock Paper Scissors game with JavaScript</h1>
+    <h2>Win five rounds to be the victor</h2>
+    <h3>
+      Player <span id="p-score">0</span> - <span id="c-score">0</span> Computer
+    </h3>
+    <button class="options">Rock</button>
+    <button class="options">Paper</button>
+    <button class="options">Scissors</button>
+    <script>
+      const options = document.querySelectorAll(".options");
+      let pScore = 0;
+      let cScore = 0;
+  
+      options.forEach((option) => {
+        console.log('x');
+        option.addEventListener("click", function () {
+        alert('zzz');
+          const pInput = this.textContent;
+  
+          const cOptions = ["Rock", "Paper", "Scissors"];
+          const cInput = cOptions[Math.floor(Math.random() * 3)];
+  
+          compareInputs(pInput, cInput);
+          updateScore();
+          if (checkWinner()) {
+            pScore = cScore = 0;
+            updateScore();
+          }
+        });
+      });
+  
+      function compareInputs(pInput, cInput) {
+        const currentMatch = `${pInput} vs ${cInput}`;
+        if (pInput === cInput) {
+          alert(`${currentMatch} is a Tie`);
+          return;
+        }
+  
+        if (pInput === "Rock") {
+          if (cInput === "Scissors") {
+            alert(`${currentMatch} = You Win`);
+            pScore++;
+          } else {
+            alert(`${currentMatch} = Computer Wins`);
+            cScore++;
+          }
+        }
+        //Check for Paper
+        else if (pInput === "Paper") {
+          if (cInput === "Rock") {
+            alert(`${currentMatch} = You Win`);
+            pScore++;
+          } else {
+            alert(`${currentMatch} = Computer Wins`);
+            cScore++;
+          }
+        }
+        //Check for Scissors
+        else {
+          if (cInput === "Paper") {
+            alert(`${currentMatch} = You Win`);
+            pScore++;
+          } else {
+            alert(`${currentMatch} = Computer Wins`);
+            cScore++;
+          }
+        }
+      }
+  
+      function updateScore() {
+        document.getElementById("p-score").textContent = pScore;
+        document.getElementById("c-score").textContent = cScore;
+      }
+  
+      function checkWinner() {
+        if (pScore === 5 || cScore === 5) {
+          const winner =
+            pScore === 5
+              ? "You win the game! Congratulations!"
+              : "Computer wins the game! Try again next time!";
+          alert(winner);
+          return true;
+        }
+        return false;
+      }
+    </script>
+  </body>
